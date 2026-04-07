@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growth and Innovation Plans</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #003366;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
+      .navbar {
+        background-color: #003358;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+        height: 80px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-sizing: border-box;
+      }
+
+      .logo {
+        font-size: 1.1rem;
+        letter-spacing: 3px;
+        font-weight: 400;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #e0e0e0;
+        font-size: 0.85rem;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #ffffff;
+      }
+
+      .login {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: white;
+      }
+
+      .pricing-section {
+        padding: 60px 20px;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .section-header h1 {
+        font-size: 2.8rem;
+        font-weight: 300;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+      }
+
+      .section-header p {
+        color: #444;
+        font-size: 1.1rem;
+      }
+
+      .pricing-container {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 1100px;
+        margin: 0 auto;
+        gap: 0;
+      }
+
+      .pricing-card {
+        flex: 1;
+        border: 1px solid #e0e0e0;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        background: #fff;
+      }
+
+      .pricing-card.featured {
+        background-color: #f4f4f4;
+      }
+
+      .badge {
+        background-color: #0d3b5c;
+        color: white;
+        padding: 6px 16px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        position: absolute;
+        top: -16px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+      }
+
+      .card-top {
+        padding: 40px 30px 20px 30px;
+        text-align: center;
+      }
+
+      .card-top h3 {
+        font-weight: 400;
+        font-size: 1.3rem;
+        margin-bottom: 25px;
+      }
+
+      .price {
+        font-size: 4.5rem;
+        font-weight: 400;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin-bottom: 15px;
+      }
+
+      .price sup {
+        font-size: 1.4rem;
+        margin-top: 18px;
+        margin-right: 4px;
+      }
+
+      .description {
+        font-size: 0.95rem;
+        min-height: 45px;
+        color: #333;
+      }
+
+      .validity {
+        font-size: 0.85rem;
+        color: #777;
+        margin: 15px 0 25px 0;
+      }
+
+      .select-btn {
+        background-color: #0d3b5c;
+        color: white;
+        border: none;
+        width: 100%;
+        padding: 18px 0;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .select-btn:hover {
+        background-color: #154d75;
+      }
+
+      .card-bottom {
+        padding: 40px 30px;
+        border-top: 1px solid #e0e0e0;
+        flex-grow: 1;
+      }
+
+      .features-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .features-list li {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        padding-left: 30px;
+        position: relative;
+        color: #222;
+      }
+
+      .features-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #333;
+        border-radius: 50%;
+      }
+
+      .features-list li::after {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: 4px;
+        width: 6px;
+        height: 3px;
+        border-left: 1.5px solid #333;
+        border-bottom: 1.5px solid #333;
+        transform: rotate(-45deg);
+      }
+
+      .consultation-section {
+        background-color: #003358;
+        padding: 80px 0;
+        text-align: center;
+      }
+
+      .consultation-section h2 {
+        color: #ffffff;
+        font-size: 2rem;
+        letter-spacing: 4px;
+        margin-bottom: 40px;
+        font-weight: 300;
+      }
+
+      .map-container {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0 auto;
+        height: 400px;
+      }
+
+      .map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        filter: grayscale(100%) invert(90%) contrast(150%);
+      }
+
+      .chat-widget {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background-color: #003358;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 1000;
+      }
+
+      footer {
+        background-color: #001b2e;
+        color: #ffffff;
+        padding: 80px 20px;
+      }
+
+      .footer-container {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1100px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .footer-column {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .footer-column h3 {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        margin-bottom: 25px;
+        font-weight: 400;
+      }
+
+      .footer-column p,
+      .footer-column li {
+        font-size: 0.9rem;
+        color: #d1d1d1;
+        line-height: 1.8;
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-column a {
+        color: #d1d1d1;
+        text-decoration: none;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .copyright {
+        margin-top: 40px;
+        font-size: 0.8rem;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">JAMES CONSULTING</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="task19.html">About</a></li>
+          <li><a href="OUR SERVICES">Services</a></li>
+          <li><a href="task18.html">Projects</a></li>
+          <li><a href="task17.html">Plans & Pricing</a></li>
+          <li><a href="task15.html">Tools & Tips</a></li>
+          <li><a href="GET A FREE CONSULTATION">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="login">
+        <i class="fas fa-user-circle" style="font-size: 1.8rem"></i>
+        <span>Log In</span>
+      </div>
+    </header>
+
+    <section class="pricing-section">
+      <header class="section-header">
+        <h1>GROWTH AND INNOVATION PLANS</h1>
+        <p>
+          We help businesses improve their performance through innovation in
+          products, services, and strategy.
+        </p>
+      </header>
+
+      <div class="pricing-container">
+        <div class="pricing-card">
+          <div class="card-top">
+            <h3>Management 101</h3>
+            <div class="price"><sup>$</sup>50</div>
+            <p class="description">
+              Actualize your business model and boost your KPIs
+            </p>
+            <p class="validity">valid for 3 months</p>
+            <button class="select-btn">Select</button>
+          </div>
+          <div class="card-bottom">
+            <ul class="features-list">
+              <li>1 Goal setting consultation</li>
+              <li>3 Individual sessions</li>
+              <li>Online resources</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="badge">Best Value</div>
+          <div class="card-top">
+            <h3>Financial Strategy</h3>
+            <div class="price"><sup>$</sup>100</div>
+            <p class="description">
+              Add value and maximize your competitive advantage
+            </p>
+            <p class="validity">valid for 6 months</p>
+            <button class="select-btn">Select</button>
+          </div>
+          <div class="card-bottom">
+            <ul class="features-list">
+              <li>1 Monthly goal setting meeting</li>
+              <li>Unlimited individual sessions</li>
+              <li>Online resources</li>
+              <li>Phone support</li>
+              <li>Weekly newsletter</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pricing-card">
+          <div class="card-top">
+            <h3>Data and Digital Sol</h3>
+            <div class="price"><sup>$</sup>70</div>
+            <p class="description">
+              Harness the power of technology to upgrade your
+            </p>
+            <p class="validity">valid for 12 months</p>
+            <button class="select-btn">Select</button>
+          </div>
+          <div class="card-bottom">
+            <ul class="features-list">
+              <li>1 Monthly goal setting meeting</li>
+              <li>4 Individual sessions</li>
+              <li>Online resources</li>
+              <li>1 Guest pass</li>
+              <li>Phone support</li>
+              <li>Weekly newsletter</li>
+              <li>Priority support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="consultation-section">
+      <h2>GET A FREE CONSULTATION</h2>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0182872455277!2d-122.3986066846819!3d37.787462779757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085807aba3d857d%3A0x6b86561f52d5b6e4!2s500%20Terry%20A%20Francois%20Blvd%2C%20San%20Francisco%2C%20CA%2094158!5e0!3m2!1sen!2sus!4v1634567890123!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>
+    <a href="task20.html" class="chat-widget-link">
+    <div class="chat-widget" role="button">
+      <i class="fas fa-comment-alt fa-lg"></i>
+    </div>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>JAMES CONSULTING</h3>
+          <p>
+            500 Terry Francine Street,<br />San Francisco, CA 94158<br />info@mysite.com<br />123-456-7890
+          </p>
+        </div>
+        <div class="footer-column">
+          <h3>MENU</h3>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Tools & Tips</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>SOCIALS</h3>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="copyright">
+            <p>© 2026 by James Consulting.<br />Powered by Wix</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

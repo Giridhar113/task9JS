@@ -1,0 +1,1560 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>James Consulting</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      /* --- Navbar --- */
+      .navbar {
+        background-color: #003358;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+        height: 80px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000; /* FIX: navbar was rendering behind hero content */
+      }
+
+      .logo {
+        font-size: 1.1rem;
+        letter-spacing: 3px;
+        font-weight: 400;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #e0e0e0;
+        font-size: 0.85rem;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #ffffff;
+      }
+
+      .login {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: white; /* FIX: login text had no color defined, inherited incorrectly */
+      }
+
+      /* --- Hero --- */
+      .hero {
+        height: 100vh;
+        background: url("https://static.wixstatic.com/media/82fcd3_47a465bb9c6f4b52a0cc83f281806af8~mv2.jpg")
+          no-repeat center center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 80px;
+      }
+
+      .hero-box {
+        background-color: white;
+        padding: 70px 50px;
+        text-align: center;
+        max-width: 850px;
+        width: 90%;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .sub-heading {
+        font-size: 22px;
+        font-weight: 300;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .main-heading {
+        font-size: clamp(32px, 5vw, 64px);
+        font-weight: 400;
+        letter-spacing: 6px;
+        color: #002b49;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        line-height: 1.2;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 14px 35px;
+        border: 1px solid #002b49;
+        color: #002b49;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        cursor: pointer; /* FIX: missing cursor pointer on button */
+      }
+
+      .cta-button:hover {
+        background-color: #002b49;
+        color: white;
+      }
+
+      /* --- Info Section --- */
+      .info-section {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        max-width: 1100px;
+        margin: 100px auto;
+        padding: 0 20px;
+        text-align: center;
+      }
+      .info-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .info-card h2 {
+        font-size: 2rem;
+        letter-spacing: 4px;
+        color: #002b49;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+      }
+
+      .info-card p {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #333;
+        margin-bottom: 35px;
+        max-width: 320px;
+      }
+
+      .info-btn {
+        display: inline-block;
+        padding: 12px 40px;
+        border: 1px solid #002b49;
+        color: #002b49;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        margin-top: auto;
+      }
+
+      .info-btn:hover {
+        background-color: #002b49;
+        color: white;
+      }
+
+      /* --- About Section --- */
+      .about-section {
+        position: relative;
+        padding: 100px 20px;
+        text-align: center;
+        background: url("https://static.wixstatic.com/media/82fcd3_47a465bb9c6f4b52a0cc83f281806af8~mv2.jpg")
+          no-repeat center center;
+        background-size: cover;
+        background-attachment: fixed;
+        color: #002b49;
+      }
+
+      .about-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(220, 235, 245, 0.85);
+        z-index: 1;
+      }
+
+      .about-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .about-content h2 {
+        font-size: 2.5rem;
+        letter-spacing: 5px;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .about-content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 30px;
+        color: #333;
+      }
+
+      .about-btn {
+        display: inline-block;
+        padding: 12px 40px;
+        border: 1px solid #002b49;
+        color: #002b49;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer; /* FIX: missing cursor pointer */
+      }
+
+      .about-btn:hover {
+        background-color: #002b49;
+        color: white;
+      }
+
+      /* --- Projects / Services Section --- */
+      .projects-wrapper {
+        max-width: 1200px;
+        margin: 80px auto;
+        padding: 0 20px;
+      }
+
+      .projects-wrapper h2 {
+        text-align: center;
+        font-size: 2rem;
+        letter-spacing: 4px;
+        color: #002b49;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+      }
+
+      .project-card {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-image-wrapper {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        margin-bottom: 25px;
+      }
+
+      .project-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        display: block;
+      }
+
+      .project-card:hover img {
+        transform: scale(1.05);
+      }
+
+      .project-number {
+        font-size: 0.9rem;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .project-title {
+        font-size: 1.25rem;
+        color: #002b49;
+        font-weight: 600;
+        margin-bottom: 15px;
+        line-height: 1.3;
+      }
+
+      .project-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 15px;
+        flex-grow: 1;
+      }
+
+      .show-more-link {
+        font-size: 0.9rem;
+        color: #333;
+        text-decoration: underline;
+        font-weight: 500;
+        margin-top: auto;
+        cursor: pointer;
+      }
+
+      .show-more-link:hover {
+        color: #002b49;
+      }
+
+      .projects-cta {
+        text-align: center;
+        margin-top: 60px;
+      }
+
+      /* --- Clients Section --- */
+      .clients-section {
+        padding: 80px 20px;
+        text-align: center;
+        background-color: #ffffff;
+      }
+
+      .clients-section h2 {
+        font-size: 2rem;
+        letter-spacing: 4px;
+        color: #002b49;
+        margin-bottom: 60px;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .logo-grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 60px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .client-logo {
+        max-width: 150px;
+        max-height: 80px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        opacity: 0.6;
+        filter: grayscale(100%);
+        transition: all 0.3s ease;
+      }
+
+      .client-logo:hover {
+        opacity: 1;
+        filter: grayscale(0%);
+      }
+
+      /* --- Testimonials --- */
+      .testimonials-section {
+        padding: 100px 20px;
+        background-color: #f7f9fb;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .testimonials-section h2 {
+        font-size: 2rem;
+        letter-spacing: 4px;
+        color: #002b49;
+        margin-bottom: 60px;
+        text-transform: uppercase;
+      }
+
+      .slider-container {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        min-height: 250px;
+        padding: 0 60px;
+      }
+
+      .testimonial-slide {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .testimonial-slide.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .testimonial-text {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: #333;
+        font-style: italic;
+        margin-bottom: 30px;
+      }
+
+      .client-role {
+        font-weight: 700;
+        color: #002b49;
+        font-size: 0.95rem;
+        margin-bottom: 5px;
+      }
+
+      .client-name {
+        color: #555;
+        font-size: 0.9rem;
+      }
+
+      .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        color: #333;
+        cursor: pointer;
+        padding: 10px;
+        transition: color 0.3s;
+        z-index: 10;
+        left: auto;
+        right: auto;
+      }
+
+      .arrow:hover {
+        color: #002b49;
+      }
+      .prev-arrow {
+        left: 0;
+      }
+      .next-arrow {
+        right: 0;
+      }
+
+      .dots-container {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .dot.active {
+        background-color: #000;
+      }
+
+      /* --- Consultation & Map --- */
+      .consultation-section {
+        background-color: #003358;
+        padding: 60px 0;
+        text-align: center;
+      }
+
+      .consultation-section h2 {
+        color: #ffffff;
+        font-size: 2.2rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 50px;
+        font-weight: 400;
+      }
+
+      .map-container {
+        width: 80%;
+        max-width: 1000px;
+        margin: 0 auto;
+        height: 400px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+        filter: grayscale(100%) invert(5%) contrast(90%);
+      }
+
+      /* --- Chat Widget --- */
+      .chat-widget {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #003358;
+        color: white;
+        width: 55px;
+        height: 55px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        transition: background-color 0.3s ease;
+      }
+
+      .chat-widget:hover {
+        background-color: #004a7c;
+      }
+
+      /* --- Footer --- */
+      footer {
+        background-color: #001b2e;
+        color: #ffffff;
+        padding: 80px 20px;
+      }
+
+      .footer-container {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1100px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .footer-column {
+        flex: 1;
+        min-width: 200px;
+      }
+      .footer-column h3 {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        margin-bottom: 25px;
+        font-weight: 400;
+      }
+      .footer-column p,
+      .footer-column li {
+        font-size: 0.9rem;
+        color: #d1d1d1;
+        line-height: 1.8;
+      }
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+      }
+      .footer-column a {
+        color: #d1d1d1;
+        text-decoration: none;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .copyright {
+        margin-top: 40px;
+        font-size: 0.8rem;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="logo">JAMES CONSULTING</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="task19.html">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="task18.html">Projects</a></li>
+          <li><a href="task17.html">Plans & Pricing</a></li>
+          <li><a href="task15.html">Tools & Tips</a></li>
+          <li><a href="#Contact">Contact</a></li>
+          
+        </ul>
+      </nav>
+      <div class="login">
+      <a href="task21.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+      <i class="fas fa-user-circle" style="font-size: 1.8rem"></i>
+      <span>Log In</span>
+  </a>
+</div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-box">
+        <h3 class="sub-heading">Developing Innovative Strategies</h3>
+        <h1 class="main-heading">ACHIEVING GROWTH</h1>
+        <a href="#" class="cta-button">Free Consultation</a>
+      </div>
+    </section>
+
+    <!-- INFO CARDS -->
+    <section class="info-section">
+      <div class="info-card">
+        <h2>SERVICES</h2>
+        <p>
+          I'm a paragraph. Click here to add your own text and edit me. It's
+          easy. Just click "Edit Text" or double click me to add your own
+          content.
+        </p>
+        <a href="#" class="info-btn">More Info</a>
+      </div>
+      <div class="info-card">
+        <h2>PROJECTS</h2>
+        <p>
+          I'm a paragraph. Click here to add your own text and edit me. It's
+          easy. Just click "Edit Text" or double click me to add your own
+          content.
+        </p>
+        <a href="#" class="info-btn">More Info</a>
+      </div>
+      <div class="info-card">
+        <h2>CLIENTS</h2>
+        <p>
+          I'm a paragraph. Click here to add your own text and edit me. It's
+          easy. Just click "Edit Text" or double click me to add your own
+          content.
+        </p>
+        <a href="#" class="info-btn">More Info</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section">
+      <div class="about-content">
+        <h2>ABOUT US</h2>
+        <p>
+          I'm a paragraph. Click here to add your own text and edit me. It's
+          easy. Just click "Edit Text" or double click me to add your own
+          content and make changes to the font. Feel free to drag and drop me
+          anywhere you like on your page.
+        </p>
+        <p>
+          This is a great space to write a long text about your company and your
+          services. You can use this space to go into a little more detail about
+          your company. Talk about your team and what services you provide.
+        </p>
+        <a href="#" class="about-btn">Learn More</a>
+      </div>
+    </section>
+
+    <!-- PROJECTS / SERVICES GRID -->
+    <div class="projects-wrapper">
+      <section id="services">
+   <h2>OUR SERVICES</h2>
+   </section>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_dae59a52e2274d72b9826ba66671cc8d~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_dae59a52e2274d72b9826ba66671cc8d~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">01.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            We tailor our services precisely to your unique requirements. This
+            package is designed to address specific challenges or goals.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_66423b8b94974a04ae261649266370a7~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_66423b8b94974a04ae261649266370a7~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">02.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Receive bespoke solutions crafted after in-depth discussions about
+            your individual needs and aspirations. We focus on results.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_e2936f897f5d4b1b824e723b2384653d~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_e2936f897f5d4b1b824e723b2384653d~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">03.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Gain access to our team's specialized knowledge and insights. This
+            package offers comprehensive advice and direction.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_a04f1fe44414475587b752835a2c4d0c~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_a04f1fe44414475587b752835a2c4d0c~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">04.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            Need a unique solution tailored to your specific needs? Our team
+            will work closely with you to define project scope and strategies.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_80aeaed7d2f645b89fb49a75b6a7c0f8~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_80aeaed7d2f645b89fb49a75b6a7c0f8~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">05.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Let us understand your individual requirements and aspirations. We
+            offer dedicated sessions to explore your situation, identify key
+            goals, and craft a path forward.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_234b2c42586a4749add69937a8fbc444~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_234b2c42586a4749add69937a8fbc444~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">06.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Leverage our deep industry knowledge and experience to navigate your
+            toughest decisions. This package provides access to expert advice
+            and strategic direction.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_10ddb949d8704deea90a5c285d6c00cd~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_10ddb949d8704deea90a5c285d6c00cd~mv2.jpg"
+              alt="Custom Project Development"
+            />
+          </div>
+          <div class="project-number">07.</div>
+          <h3 class="project-title">Custom Project Development</h3>
+          <p class="project-description">
+            Bring your unique vision to life with our bespoke solutions,
+            meticulously designed to meet your specific requirements. We
+            collaborate closely with you.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_cca34803ffa54051b331b94979ea7557~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_cca34803ffa54051b331b94979ea7557~mv2.jpg"
+              alt="Personalized Strategy Session"
+            />
+          </div>
+          <div class="project-number">08.</div>
+          <h3 class="project-title">Personalized Strategy Session</h3>
+          <p class="project-description">
+            Unlock your potential with our dedicated planning service, where we
+            delve into your distinct challenges and objectives to craft a clear
+            strategy.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_62efd862cb0a4a799d6e10464bcecbd2~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_62efd862cb0a4a799d6e10464bcecbd2~mv2.jpg"
+              alt="Client Success Roadmap"
+            />
+          </div>
+          <div class="project-number">09.</div>
+          <h3 class="project-title">Client Success Roadmap</h3>
+          <p class="project-description">
+            Navigate your journey with confidence using our comprehensive
+            roadmap service, designed by seasoned professionals to illuminate
+            your path forward.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_6212b161ccb84c5f920a16feec6124cc~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_6212b161ccb84c5f920a16feec6124cc~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">10.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            Unlock unique solutions tailored precisely to your specific needs.
+            This service is designed for bespoke requirements that demand
+            creative problem-solving.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_f1249e328137422aac895d98c9e21429~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_f1249e328137422aac895d98c9e21429~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">11.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Receive a personalized roadmap crafted to address your individual
+            goals and circumstances. We dive deep into understanding your unique
+            situation.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_6eba527e7d654af6916a1169e5db1ffc~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_6eba527e7d654af6916a1169e5db1ffc~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">12.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Tap into our extensive knowledge and experience to gain valuable
+            insights for your endeavors. This package offers structured advice
+            and strategic direction.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_7d631f1afcc4490f95ddc8ce4adaf084~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_7d631f1afcc4490f95ddc8ce4adaf084~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">13.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            This service is designed to tackle unique challenges and
+            opportunities specific to your needs. We'll work collaboratively to
+            define scope and deliver results.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_ca79f6a00093405b886d6459e204b9f7~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_ca79f6a00093405b886d6459e204b9f7~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">14.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Engage in a dedicated session to discuss your individual
+            requirements and goals. We focus on understanding your precise
+            situation to map out a clear plan.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_5f4c151c545b48f799802b808a0734fd~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_5f4c151c545b48f799802b808a0734fd~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">15.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Leverage our accumulated knowledge and experience to navigate
+            complex decisions. This package provides structured insights and
+            strategic recommendations.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/11062b_d200caf52a5b427fa6e0b42ee3821b94~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/11062b_d200caf52a5b427fa6e0b42ee3821b94~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">16.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            This service is designed to tackle your unique challenges. We
+            collaborate closely with you to understand your specific needs and
+            deliver tailored outcomes.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_9c9777f3366242aca7f3511799c00363~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_9c9777f3366242aca7f3511799c00363~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">17.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Get a personalized strategy tailored to your individual situation.
+            We take the time to listen and understand your goals before crafting
+            a solution.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/11062b_d200caf52a5b427fa6e0b42ee3821b94~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/11062b_d200caf52a5b427fa6e0b42ee3821b94~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">18.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Benefit from our collective expertise to navigate complex
+            situations. This package offers comprehensive support and insights
+            from industry veterans.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_31a205ab223c4c488ca6c632d4eea099~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_31a205ab223c4c488ca6c632d4eea099~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">19.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            We specialize in creating bespoke solutions tailored to your unique
+            requirements. Our team collaborates closely with you, ensuring every
+            detail aligns with your vision.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_c23a6a060c5946889ce2d562d31d82a4~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_c23a6a060c5946889ce2d562d31d82a4~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">20.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Understand your individual needs through dedicated, one-on-one
+            sessions. We work with you to define your goals and challenges
+            clearly, then build a roadmap together.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_df1849d863554e07b9de36f0c243ee62~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_df1849d863554e07b9de36f0c243ee62~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">21.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Leverage our deep industry knowledge and strategic insights to
+            navigate complex challenges. This package offers structured support
+            to help you move forward confidently.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_bce3d6566c45479488e1019744da5987~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_bce3d6566c45479488e1019744da5987~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">22.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            We delve into your unique requirements to craft a bespoke solution
+            tailored precisely to your needs. Our process ensures every detail
+            is carefully considered.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_f8862f06318e4435a802cc9db8290e9d~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_f8862f06318e4435a802cc9db8290e9d~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">23.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Navigate your challenges with a dedicated plan designed around your
+            specific situation. We work closely with you to understand your
+            goals and build a clear path forward.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_fea01ad0d4ec4464acfe497078eb270f~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_fea01ad0d4ec4464acfe497078eb270f~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">24.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Leverage our extensive industry knowledge to gain clarity and
+            direction. This package offers comprehensive insights and strategic
+            recommendations to move you forward.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_0258e58a5eae4d2b83437470bbc0f415~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_0258e58a5eae4d2b83437470bbc0f415~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">25.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            Tailored to your unique needs, this service offers a flexible
+            approach to tackle specific challenges or opportunities. We
+            collaborate closely to define and deliver your solution.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_736ac7a385c147ed98bc3b56908d09e5~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_736ac7a385c147ed98bc3b56908d09e5~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">26.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Discover the best path forward with personalized guidance. We engage
+            in in-depth discussions to understand your individual situation and
+            craft a bespoke strategy.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_55cbbf947fcd4ec2a6f73bad9866b01c~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_55cbbf947fcd4ec2a6f73bad9866b01c~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">27.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Leverage our specialized knowledge to navigate complex situations.
+            This package provides expert insights and strategic advice to help
+            you achieve your goals.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_53ffb864da1741cd810f103e9c997b1f~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_53ffb864da1741cd810f103e9c997b1f~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">28.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            This service is designed to address unique client needs that fall
+            outside standard offerings. We will collaborate closely with you to
+            understand and deliver a tailored solution.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_e69d9a9cc08e49d99440648957b4e9df~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_e69d9a9cc08e49d99440648957b4e9df~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">29.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            We offer dedicated support to help you map out the most effective
+            strategy for your personal objectives. Through in-depth discussions,
+            we build a plan around you.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_964990c08efb437ea655cc38c92130e8~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_964990c08efb437ea655cc38c92130e8~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">30.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Gain invaluable insights and strategic direction from our seasoned
+            professionals. This package provides comprehensive expert advice to
+            drive your success.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_3728319f1dc64e42888cf9726ab1678b~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_3728319f1dc64e42888cf9726ab1678b~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">31.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            This service is designed for unique client needs that require
+            bespoke solutions. We collaborate closely with you to understand
+            your specific requirements and deliver results.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_21aff1fbf0814c6b9044a60811f478af~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_21aff1fbf0814c6b9044a60811f478af~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">32.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Discover a solution crafted exclusively for your individual
+            circumstances and goals. We engage in in-depth discussions to
+            thoroughly understand your needs.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_df23fe0bcff54495904f0ec050a02d1c~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_df23fe0bcff54495904f0ec050a02d1c~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">33.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Access unparalleled expertise to navigate complex decisions and
+            opportunities. This package offers strategic insights and informed
+            recommendations tailored to you.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_5be36941b6ad49d39b53aec511b13ba4~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_5be36941b6ad49d39b53aec511b13ba4~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">34.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            This service is designed for unique challenges that require tailored
+            solutions. We will work closely with you to understand your specific
+            needs and deliver results.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_01cfeabb029c41aa9988609789f507f1~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_01cfeabb029c41aa9988609789f507f1~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">35.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Our Personal Solution Planning service focuses on deep understanding
+            of your individual requirements. We engage in a thorough discovery
+            process before crafting your plan.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_b2d8933010e74502a9d4dffed897f729~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_b2d8933010e74502a9d4dffed897f729~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">36.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Leverage our deep industry knowledge with the Expert Guidance
+            Package. This comprehensive service provides strategic insights and
+            direction tailored to your goals.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_fd25877b51ea4525a320ae8ec0749ca3~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_fd25877b51ea4525a320ae8ec0749ca3~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">37.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            This service is designed for unique challenges and bespoke
+            solutions. We dive deep into your specific needs to craft a tailored
+            approach that ensures real results.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_d68ae51f3ef04be3b89bc9df0b92f770~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_d68ae51f3ef04be3b89bc9df0b92f770~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">38.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Navigate your personal challenges with our dedicated planning
+            service. We engage in in-depth conversations to understand your
+            individual needs and build a tailored plan.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_8939aaa5c9294f11a91d9b3640b5c18c~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_8939aaa5c9294f11a91d9b3640b5c18c~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">39.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Access specialized knowledge and strategic insights with our
+            comprehensive guidance package. We provide expert advice to help you
+            overcome your most complex challenges.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_079291774e074aeeaa44af5c703a5f4e~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_079291774e074aeeaa44af5c703a5f4e~mv2.jpg"
+              alt="Custom Project"
+            />
+          </div>
+          <div class="project-number">40.</div>
+          <h3 class="project-title">Custom Project</h3>
+          <p class="project-description">
+            Tailored to your unique needs, this service provides a bespoke
+            solution crafted from scratch. We collaborate closely to understand
+            your vision and bring it to life.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_d342110202cd4077b27fd06df6fd8a81~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_d342110202cd4077b27fd06df6fd8a81~mv2.jpg"
+              alt="Personal Solution Planning"
+            />
+          </div>
+          <div class="project-number">41.</div>
+          <h3 class="project-title">Personal Solution Planning</h3>
+          <p class="project-description">
+            Get personalized advice and strategic planning designed just for
+            you. We engage in deep conversations to understand your specific
+            challenges and build a clear roadmap.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image-wrapper">
+            <img
+              src="https://static.wixstatic.com/media/323cdb_74273b4e78224028bbac906c3435ef0a~mv2.jpg/v1/fill/w_229,h_229,fp_0.50_0.50,q_80,enc_auto/323cdb_74273b4e78224028bbac906c3435ef0a~mv2.jpg"
+              alt="Expert Guidance Package"
+            />
+          </div>
+          <div class="project-number">42.</div>
+          <h3 class="project-title">Expert Guidance Package</h3>
+          <p class="project-description">
+            Leverage our deep industry knowledge and experience to navigate
+            complex challenges. This package offers strategic insights and
+            creative problem-solving for lasting results.
+          </p>
+          <a href="#" class="show-more-link">Show more</a>
+        </div>
+      </div>
+
+      <div class="projects-cta">
+        <a href="#" class="cta-button">Free Consultation</a>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <section class="clients-section">
+      <div class="container">
+        <h2 class="clients-title">OUR CLIENTS</h2>
+        <div class="logo-grid">
+          <img src="Photo1.jpg" alt="Keno" class="client-logo" />
+          <img src="Photo2.jpg" alt="Lendo" class="client-logo" />
+          <img src="Photo3.jpg" alt="DMC" class="client-logo" />
+          <img src="Photo4.jpg" alt="Athos" class="client-logo" />
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section">
+      <h2>TESTIMONIALS</h2>
+      <div class="slider-container">
+        <i
+          class="fas fa-chevron-left arrow prev-arrow"
+          onclick="changeSlide(-1)"
+          role="button"
+          aria-label="Previous testimonial"
+        ></i>
+        <i
+          class="fas fa-chevron-right arrow next-arrow"
+          onclick="changeSlide(1)"
+          role="button"
+          aria-label="Next testimonial"
+        ></i>
+
+        <div class="testimonial-slide active">
+          <p class="testimonial-text">
+            "I'm a testimonial. Click to edit me and add text that says
+            something nice about you and your services."
+          </p>
+          <div class="client-role">Project Manager</div>
+          <div class="client-name">Dora Bridges</div>
+        </div>
+
+        <div class="testimonial-slide">
+          <p class="testimonial-text">
+            "I'm a testimonial. Click to edit me and add text that says
+            something nice about you and your services."
+          </p>
+          <div class="client-role">Operations Manager</div>
+          <div class="client-name">Brad Stevens</div>
+        </div>
+
+        <div class="testimonial-slide">
+          <p class="testimonial-text">
+            "I'm a testimonial. Click to edit me and add text that says
+            something nice about you and your services."
+          </p>
+          <div class="client-role">Marketing Director</div>
+          <div class="client-name">Sarah Lane</div>
+        </div>
+      </div>
+
+      <div class="dots-container">
+        <span
+          class="dot active"
+          onclick="currentSlide(0)"
+          role="button"
+          aria-label="Slide 1"
+        ></span>
+        <span
+          class="dot"
+          onclick="currentSlide(1)"
+          role="button"
+          aria-label="Slide 2"
+        ></span>
+        <span
+          class="dot"
+          onclick="currentSlide(2)"
+          role="button"
+          aria-label="Slide 3"
+        ></span>
+      </div>
+    </section>
+
+    <!-- CONSULTATION + MAP -->
+    <section class="consultation-section">
+      <section id="Contact">
+      <h2>GET A FREE CONSULTATION</h2>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.123456789!2d-122.419415!3d37.774929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050c62!2sCivic%20Center%2C%20San%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1640000000000!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Office Location Map"
+        >
+        </iframe>
+      </div>
+    </section>
+
+    <!-- CHAT WIDGET -->
+   <a href="task20.html" class="chat-widget-link">
+
+    <div
+      class="chat-widget"
+      role="button"
+      aria-label="Open Chat"
+      onclick="toggleChat()"
+    >
+      <i class="fas fa-comment-alt fa-lg"></i>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>JAMES CONSULTING</h3>
+          <p>
+            500 Terry Francine Street,<br />San Francisco, CA 94158<br />info@mysite.com<br />123-456-7890
+          </p>
+        </div>
+        <div class="footer-column">
+          <h3>MENU</h3>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Tools & Tips</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>SOCIALS</h3>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="copyright">
+            <p>© 2026 by James Consulting.<br />Powered by Wix</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      let slideIndex = 0;
+      const slides = document.querySelectorAll(".testimonial-slide");
+      const dots = document.querySelectorAll(".dot");
+      let autoplayTimer;
+      function showSlides(n) {
+        if (n >= slides.length) slideIndex = 0;
+        if (n < 0) slideIndex = slides.length - 1;
+        slides.forEach((s) => s.classList.remove("active"));
+        dots.forEach((d) => d.classList.remove("active"));
+        slides[slideIndex].classList.add("active");
+        dots[slideIndex].classList.add("active");
+      }
+
+      function changeSlide(n) {
+        clearInterval(autoplayTimer);
+        showSlides((slideIndex += n));
+        startAutoplay();
+      }
+
+      function currentSlide(n) {
+        clearInterval(autoplayTimer);
+        showSlides((slideIndex = n));
+        startAutoplay();
+      }
+
+      function startAutoplay() {
+        autoplayTimer = setInterval(() => changeSlide(1), 5000);
+      }
+
+      startAutoplay();
+    </script>
+  </body>
+</html>

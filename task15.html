@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tools & Tips - James Consulting</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      /* Base Styles */
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
+      .navbar {
+        background-color: #003358;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+        height: 80px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-sizing: border-box;
+      }
+
+      .logo {
+        font-size: 1.1rem;
+        letter-spacing: 3px;
+        font-weight: 400;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #e0e0e0;
+        font-size: 0.85rem;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #ffffff;
+      }
+
+      .login {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: white;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 60px 20px;
+      }
+
+      /* --- Header Section --- */
+      .header-section {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+
+      .header-section h1 {
+        font-size: 52px;
+        letter-spacing: 5px;
+        font-weight: 300;
+        margin: 0 0 25px 0;
+        color: #001f3f;
+        text-transform: uppercase;
+      }
+
+      .header-section p {
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 750px;
+        margin: 0 auto;
+        color: #333;
+      }
+
+      /* --- Search & Controls --- */
+      .controls-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 10px;
+      }
+
+      .search-container {
+        position: relative;
+        width: 300px;
+      }
+
+      .search-container input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #999;
+        padding: 8px 0 8px 30px;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 5px;
+        top: 8px;
+        color: #666;
+      }
+
+      /* --- File Table --- */
+      .breadcrumb-label {
+        font-size: 14px;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .table-head {
+        display: flex;
+        align-items: center;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #1a1a1a;
+        font-size: 14px;
+      }
+
+      .file-row {
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #eeeeee;
+      }
+
+      .file-row.active-row {
+        background-color: #f8f8f8;
+      }
+
+      /* Column Sizing */
+      .col-check {
+        width: 50px;
+        text-align: center;
+      }
+      .col-name {
+        flex: 4;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .col-updated {
+        flex: 1.5;
+      }
+      .col-views {
+        flex: 0.8;
+        text-align: center;
+      }
+      .col-favs {
+        flex: 1;
+        text-align: center;
+      }
+      .col-member {
+        flex: 1.5;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .col-actions {
+        width: 40px;
+        text-align: right;
+      }
+
+      .folder-icon {
+        font-size: 24px;
+        color: #555;
+      }
+      .name-text .title {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .name-text .subtitle {
+        font-size: 12px;
+        color: #777;
+      }
+
+      .avatar-circle {
+        width: 26px;
+        height: 26px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+      }
+
+      /* --- Consultation Section --- */
+      .consultation-section {
+        background-color: #003358;
+        padding: 80px 0;
+        text-align: center;
+      }
+
+      .consultation-section h2 {
+        color: #ffffff;
+        font-size: 2rem;
+        letter-spacing: 4px;
+        margin-bottom: 40px;
+        font-weight: 300;
+      }
+
+      .map-container {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0 auto;
+        height: 400px;
+      }
+
+      .map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        filter: grayscale(100%) invert(90%) contrast(150%); /* Dark mode map effect */
+      }
+
+      /* --- Chat Widget --- */
+      .chat-widget {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background-color: #003358;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 1000;
+      }
+
+      /* --- Footer --- */
+      footer {
+        background-color: #001b2e;
+        color: #ffffff;
+        padding: 80px 20px;
+      }
+
+      .footer-container {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1100px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .footer-column {
+        flex: 1;
+        min-width: 200px;
+      }
+      .footer-column h3 {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        margin-bottom: 25px;
+        font-weight: 400;
+      }
+      .footer-column p,
+      .footer-column li {
+        font-size: 0.9rem;
+        color: #d1d1d1;
+        line-height: 1.8;
+      }
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+      }
+      .footer-column a {
+        color: #d1d1d1;
+        text-decoration: none;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .copyright {
+        margin-top: 40px;
+        font-size: 0.8rem;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">JAMES CONSULTING</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="task19.html">About</a></li>
+          <li><a href="OUR SERVICES">Services</a></li>
+          <li><a href="task18.html">Projects</a></li>
+          <li><a href="task17.html">Plans & Pricing</a></li>
+          <li><a href="task15.html">Tools & Tips</a></li>
+          <li><a href="GET A FREE CONSULTATION">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="login">
+        <i class="fas fa-user-circle" style="font-size: 1.8rem"></i>
+        <span>Log In</span>
+      </div>
+    </header>
+
+    <div class="container">
+      <section class="header-section">
+        <h1>Tools & Tips</h1>
+        <p>
+          Use this area to upload files you wish to share with your users. You
+          can manage who has access to your files and what they can do.
+        </p>
+      </section>
+
+      <div class="controls-wrapper">
+        <div class="search-container">
+          <i class="fa fa-search search-icon"></i>
+          <input type="text" placeholder="Search 'Files & Folders'..." />
+        </div>
+      </div>
+
+      <span class="breadcrumb-label">Files & Folders</span>
+
+      <div class="table-head">
+        <div class="col-check"><input type="checkbox" /></div>
+        <div class="col-name">
+          Item name &nbsp; <i class="fa fa-arrow-up"></i>
+        </div>
+        <div class="col-updated">Last updated</div>
+        <div class="col-views">Views</div>
+        <div class="col-favs">Favorites</div>
+        <div class="col-member">Contributors</div>
+        <div class="col-actions"><i class="fa fa-sort"></i></div>
+      </div>
+
+      <div class="file-list">
+        <div class="file-row active-row">
+          <div class="col-check"><input type="checkbox" /></div>
+          <div class="col-name">
+            <i class="fa-regular fa-folder folder-icon"></i>
+            <div class="name-text">
+              <span class="title">Marketing Tools</span>
+              <span class="subtitle">0 items</span>
+            </div>
+          </div>
+          <div class="col-updated">Jan 5, 2022</div>
+          <div class="col-views">16</div>
+          <div class="col-favs"><i class="fa-regular fa-star"></i> 0</div>
+          <div class="col-member">
+            <div class="avatar-circle"><i class="fa fa-user"></i></div>
+            <span>Member</span>
+          </div>
+          <div class="col-actions"><i class="fa fa-ellipsis-v"></i></div>
+        </div>
+
+        <div class="file-row">
+          <div class="col-check"><input type="checkbox" /></div>
+          <div class="col-name">
+            <i class="fa-regular fa-folder folder-icon"></i>
+            <div class="name-text">
+              <span class="title">Time management tools</span>
+              <span class="subtitle">0 items</span>
+            </div>
+          </div>
+          <div class="col-updated">Jan 5, 2022</div>
+          <div class="col-views">3</div>
+          <div class="col-favs"><i class="fa-regular fa-star"></i> 0</div>
+          <div class="col-member">
+            <div class="avatar-circle"><i class="fa fa-user"></i></div>
+            <span>Member</span>
+          </div>
+          <div class="col-actions"><i class="fa fa-ellipsis-v"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="consultation-section">
+      <h2>GET A FREE CONSULTATION</h2>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019297157254!2d-122.3988!3d37.7877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085806305f63935%3A0x6968037a54497a7!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1641380000000!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>
+    <a href="task20.html" class="chat-widget-link">
+    <div class="chat-widget" role="button">
+      <i class="fas fa-comment-alt fa-lg"></i>
+    </div>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>JAMES CONSULTING</h3>
+          <p>
+            500 Terry Francine Street,<br />San Francisco, CA 94158<br />info@mysite.com<br />123-456-7890
+          </p>
+        </div>
+        <div class="footer-column">
+          <h3>MENU</h3>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Tools & Tips</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>SOCIALS</h3>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="copyright">
+            <p>© 2026 by James Consulting.<br />Powered by Wix</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
